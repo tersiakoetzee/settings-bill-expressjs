@@ -1,0 +1,28 @@
+<style>
+table,th,td{
+    border: 1px solid turquoise;
+     padding-left: 2cm 2cm 2cm 2cm;
+    border-collapse: collapse;
+   
+
+}
+</style>
+
+<div class="row">
+<h1>Actions</h1>
+
+<table>
+    <tr>
+        <th>Type</th>
+        <th>Price</th>
+        <th>When</th>
+    </tr>
+    {{#each actions}}
+    <tr>
+        <td>{{type}}</td>
+        <td>{{cost}}</td>
+        <td>{{timestamp}}</td>
+    </tr>
+    {{/each}}
+</table>
+</div>
