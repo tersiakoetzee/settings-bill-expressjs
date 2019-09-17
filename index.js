@@ -27,6 +27,7 @@ app.get('/', function (req, res) {
     res.render('index', {
         total: settingsBill.totals(),
         color: settingsBill.colorLevel(),
+        settings:  settingsBill.getSettings()
         // criticalLevel: settingsBill.colorLevel()
 
     });

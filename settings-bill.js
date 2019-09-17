@@ -4,7 +4,7 @@ module.exports = function SettingsBill() {
     let callCost = 0;
     let warningLevel = 0;
     let criticalLevel = 0;
-
+    let grandTotal = 0;
 
     let actionList = [];
 
@@ -74,42 +74,41 @@ module.exports = function SettingsBill() {
     }
     
     function getGrandTotal(){
-        return getTotal('sms') + getTotal('call');
+        return grandTotal
     }
 
 
     function totals() {
 
-
         let smsTotal = getTotal('sms')
         let callTotal = getTotal('call')
-        let grandTotal = smsTotal + callTotal;
+         grandTotal = smsTotal + callTotal;
 
 
         return {
             smsTotal,
             callTotal,
-            grandTotal: getGrandTotal()
+            grandTotal
         }
 
     }
 
 
     function colorLevel() {
-       
-        if ((getGrandTotal >= warningLevel) && (totals < criticalLevel)) {
-            console.log(getGrandTotal);
+        let warn = 0
+        if (getGrandTotal() >= warningLevel && getGrandTotal() < criticalLevel) {
+            console.log("sdsdsdsdsdsdsd" + totals.grandTotal);
             
             return "warning"
         }
 
-        if (getGrandTotal >= criticalLevel) {
+        if (getGrandTotal() >= criticalLevel) {
             return "danger"
         }
 
        
         else{
-            return ""
+            return warn;
         }
     }
 
