@@ -25,20 +25,23 @@ module.exports = function SettingsBill() {
     }
 
     function recordAction(action) {
-
+        var moment = require('moment');
         let cost = 0;
-        if (action === 'sms') {
-            cost = smsCost;
-        }
-        else if (action === 'call') {
-            cost = callCost;
+        if (!fullStop()){
+            if (action === 'sms') {
+                cost = smsCost;
+            }
+            else if (action === 'call') {
+                cost = callCost;
+            }
         }
        
 
         actionList.push({
             type: action,
             cost,
-            timestamp: new Date()
+            timestamp:   moment(new Date()).fromNow(),
+          
         });
     }
 
@@ -97,7 +100,7 @@ module.exports = function SettingsBill() {
     function colorLevel() {
         let warn = 0
         if (getGrandTotal() >= warningLevel && getGrandTotal() < criticalLevel) {
-            console.log("sdsdsdsdsdsdsd" + totals.grandTotal);
+           
             
             return "warning"
         }
@@ -112,6 +115,11 @@ module.exports = function SettingsBill() {
         }
     }
 
+    function fullStop(){
+      return  getGrandTotal() >= criticalLevel
+
+    }
+
     return {
         setSettings,
         getSettings,
@@ -120,6 +128,7 @@ module.exports = function SettingsBill() {
         actionsFor,
         totals,
         colorLevel,
-        getGrandTotal
+        getGrandTotal,
+        fullStop
     }
 }
