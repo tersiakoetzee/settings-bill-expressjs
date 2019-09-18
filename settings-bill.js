@@ -25,7 +25,7 @@ module.exports = function SettingsBill() {
     }
 
     function recordAction(action) {
-        if (!fullStop()){ }
+        if (!fullStop()){ 
         var moment = require('moment');
         let cost = 0;
         
@@ -41,9 +41,10 @@ module.exports = function SettingsBill() {
         actionList.push({
             type: action,
             cost,
-            timestamp:   moment(new Date()).format("HH:mm:ss"),
+            timestamp:   moment(new Date()).format(":ss"),
           
         });
+    }
     }
     }
 
