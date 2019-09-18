@@ -25,29 +25,32 @@ module.exports = function SettingsBill() {
     }
 
     function recordAction(action) {
+        if (!fullStop()){ }
         var moment = require('moment');
         let cost = 0;
-        if (!fullStop()){
+        
             if (action === 'sms') {
                 cost = smsCost;
             }
             else if (action === 'call') {
                 cost = callCost;
             }
-        }
        
+            if(action !== undefined){
 
         actionList.push({
             type: action,
             cost,
-            timestamp:   moment(new Date()).fromNow(),
+            timestamp:   moment(new Date()).format("HH:mm:ss"),
           
         });
+    }
     }
 
     function actions() {
         return actionList;
     }
+
 
     function actionsFor(type) {
         const filteredActions = [];
@@ -98,7 +101,8 @@ module.exports = function SettingsBill() {
 
 
     function colorLevel() {
-        let warn = 0
+     
+        if(criticalLevel !== 0){
         if (getGrandTotal() >= warningLevel && getGrandTotal() < criticalLevel) {
            
             
@@ -111,8 +115,9 @@ module.exports = function SettingsBill() {
 
        
         else{
-            return warn;
+            return "warn";
         }
+    }
     }
 
     function fullStop(){
@@ -129,6 +134,8 @@ module.exports = function SettingsBill() {
         totals,
         colorLevel,
         getGrandTotal,
-        fullStop
+        fullStop,
+        
+
     }
 }
