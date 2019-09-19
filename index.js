@@ -2,6 +2,8 @@ const express = require('express');
 const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser')
 const SettingsBill = require('./settings-bill')
+const moment = require('moment');
+moment().format()
 
 const app = express();
 const settingsBill = SettingsBill();
@@ -54,12 +56,22 @@ app.post('/action', function (req, res) {
 
 
 app.get('/actions', function (req, res) {
-    res.render("actions", { actions: settingsBill.actions() })
+    var stamp = settingsBill.actions()
+    for (let i = 0; i < stamp.length; i++) {
+     const time = stamp[i];
+      time.tait = moment(time.timestamp).fromNow()  
+    }
+    res.render("actions", { actions: stamp })
 });
 
 app.get('/actions/:actionType', function (req, res) {
     const actionType = req.params.actionType;
-    res.render("actions", { actions: settingsBill.actionsFor(actionType) })
+    var stamp = settingsBill.actionsFor(actionType)
+    for (let i = 0; i < stamp.length; i++) {
+     const time = stamp[i];
+      time.tait = moment(time.timestamp).fromNow()  
+    }
+    res.render("actions", { actions: stamp })
 });
 
 const PORT = process.env.PORT || 8000;
