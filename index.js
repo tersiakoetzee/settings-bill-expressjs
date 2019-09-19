@@ -54,7 +54,7 @@ app.post('/action', function (req, res) {
     res.redirect('/');
 });
 
-
+//get route for actions.
 app.get('/actions', function (req, res) {
     var stamp = settingsBill.actions()
     for (let i = 0; i < stamp.length; i++) {
