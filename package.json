@@ -6,7 +6,7 @@
   "directories": {
     "test": "test"
   },
-  "scripts": {
+  "script": {
     "test": "mocha",
     "start": "node index.js"
   },
@@ -21,7 +21,5 @@
     "express-handlebars": "^3.1.0",
     "moment": "^2.24.0"
   },
-  "script": {
-    "test": "mocha"
-  }
 }
+ 
