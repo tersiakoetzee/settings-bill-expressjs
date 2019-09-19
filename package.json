@@ -8,6 +8,7 @@
   },
   "scripts": {
     "test": "mocha",
+    "mocha" : ".node_modules/bin/mocha",
     "start": "node index.js"
   },
   "author": "Tersia Koetzee",
